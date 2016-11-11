@@ -25,9 +25,9 @@ class City
 {
 private:
 	string cityName;
-	int index;
-	int id;
-	string color;
+	int index;//line a person is on
+	vector<Citizen*>theCitizen;//vector favoritecolor
+	int countPeople;//population
 public://Given in Exam
 
 	//Creates a new city with the given name

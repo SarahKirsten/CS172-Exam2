@@ -24,10 +24,10 @@ using namespace std;
 class Citizen
 {
 private://written by me
-	int id;
-	string firstName;
-	string lastName;
-	string color;
+	int id;//id
+	string firstName;//first name of citizen
+	string lastName;//last name of citizen
+	string color;//color
 public://Code given in Exam
 
 	//Creates a new Citizen object with the passed in

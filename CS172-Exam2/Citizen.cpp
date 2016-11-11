@@ -11,42 +11,42 @@
 
 Citizen::Citizen(int id, string firstName, string lastName, string color)
 {
-	this->id = id;
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->color = color;
+	this->id = id;//id is citizen id
+	this->firstName = firstName;//first name is citizen first name
+	this->lastName = lastName;//last name is citizen last name
+	this->color = color;//color is citizen color
 }
 
 //copy citizen before it gets erased
 Citizen::Citizen(Citizen* citizen)
 {
-	id = citizen->id;
-	firstName = citizen->firstName;
-	lastName = citizen->lastName;
-	color = citizen->color;
+	id = citizen->getId();//id is citizen id
+	firstName = citizen->getFirstName();//first name is citizen first name
+	lastName = citizen->getLastName();//last name is citizen last name
+	color = citizen->getFavoriteColor();//color is citizen color
 }
 
-string Citizen::getFirstName()
+string Citizen::getFirstName()//first name
 {
 	return firstName;
 }
 
-string Citizen::getLastName()
+string Citizen::getLastName()//last name
 {
 	return lastName;
 }
 
-int Citizen::getId()
+int Citizen::getId()//id of citizen
 {
 	return id;
 }
 
-string Citizen::getFavoriteColor()
+string Citizen::getFavoriteColor()//color of citizen
 {
 	return color;
 }
 
-void Citizen::setFavoriteColor(string color)
+void Citizen::setFavoriteColor(string color)//changes the color of citizen
 {
 	this->color = color;
 }

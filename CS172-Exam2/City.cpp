@@ -8,56 +8,92 @@
 ///////////////////////
 #include "City.h"
 
-City::City(string cityName)
+City::City(string cityName)//constructor
 {
-	this->cityName = cityName;
-	string fileName = cityName + ".txt";
-	ofstream city;
+	this->cityName = cityName;//city name is what is given
+	string fileName = cityName + ".txt";//to open a text file of that city
+	countPeople = 0;//population
+	ifstream city;//title of file
 	//open file. if not real, then create it
-	city.open("/Users/Sarah/Source/Repos/CS172-Exam2/CS172-Exam2/"+fileName, fstream::out | fstream::app);
+	city.open(fileName.c_str());
+	if (!city.fail())
+	{
+		while (!city.eof())
+		{
+			int id;
+			string firstName, lastName, favoriteColor;
+			city >> id >> firstName >> lastName >> favoriteColor;//put id, first, last, color in file
+			Citizen* citizen = new Citizen(id, firstName, lastName, favoriteColor);
+			addCitizen(citizen);//put the citizen in the city file
+			delete citizen;
+		}
+	}
+	city.close();//close file
 	
-	void addCitizen(Citizen* citizen);
-	//stuff that needs to happen in these files
-
-	city.close();
 	
 }
 
-City::~City()
+City::~City()//deconstructor
 {
-	
+	string fileName = cityName + ".txt";//text file of the city
+	fstream saveCity(fileName, ios::out);
+	saveCity.clear();//clear the city
+	Citizen* citizen;
+	for (int i = 0; i < countPeople;i++)//saves the citizens in the city to file
+	{
+		citizen = getCitizenAtIndex(i);
+		saveCity << citizen->getId() << " " << citizen->getFirstName() << " " << citizen->getLastName() << " " << citizen->getFavoriteColor();
+	}
+	saveCity.close();//close the city
 }
 
-string City::getCityName()
+string City::getCityName()//city name
 {
 	return cityName;
 }
 
-int City::populationSize()
+int City::populationSize()//population
 {
-	return index;
+	return countPeople;
 }
 
-Citizen* City::getCitizenAtIndex(int index)
+Citizen* City::getCitizenAtIndex(int index)//find the citizen on a certain line
 {
-	return nullptr;
+	return theCitizen[index];
 }
 
-void City::addCitizen(Citizen* citizen)
+void City::addCitizen(Citizen* citizen)//add a citizen to a file that already has citizens
 {
-	Citizen::Citizen(citizen);
-
-
-	index++;
+	theCitizen.push_back(citizen);
+	countPeople++;//increase the population
 }
 
-Citizen* City::getCitizenWithId(int id)
+Citizen* City::getCitizenWithId(int id)//find citizen in city with matching id
 {
-	return nullptr;
+	Citizen* citizen;
+	for (int i = 0; i < countPeople;i++)
+	{
+		citizen = getCitizenAtIndex(i);
+		if (citizen->getId() == id)
+			return citizen;
+	}
 }
 
-vector <Citizen*> City::getCitizensForFavoriteColor(string color)
+
+//i know this is wrong. idk what to do.
+vector <Citizen*> City::getCitizensForFavoriteColor(string color)//return how many citizens in that city like that color
 {
+	vector<Citizen*> favColor;
+	Citizen* citizen;
+	for (int i = 0; i < countPeople;i++)
+	{
+		citizen = getCitizenAtIndex(i);
+		if (citizen->getFavoriteColor() == color)
+			favColor.push_back(theCitizen[i]);
+			
+			
+		return favColor;
 	
-	return vector<Citizen*>();
+
+	}
 }
